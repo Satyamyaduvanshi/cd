@@ -1,4 +1,5 @@
-test 2(checking if it works or not)
+test 2(checking if it works or not) failed
+test 3 
 
 Q1) Write a Lex program to count the number of lines and characters in the input file.
 
