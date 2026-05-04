@@ -1,76 +1,7 @@
 P1 : Write a program to demonstrate sending a digitally signed document, including signing
 and verification.
 
-Code:
-
-from cryptography.hazmat.primitives.asymmetric import rsa, padding from
-cryptography.hazmat.primitives import hashes
-import hashlib
-import base64
-print("\nGenerating RSA Key Pair")
-private_key = rsa.generate_private_key(
-public_exponent=65537,
-key_size=2048
-)
-public_key = private_key.public_key()
-print("PUBLIC KEY GENERATED\n")
-
-print("Enter message to sign:")
-user_input = input(">> ")
-if user_input.strip() == "":
-user_input = "Humpty dumpty sat on the wall"
-document = user_input.encode()
-print("Document:", user_input, "\n")
-
-print("Hashing Document (SHA-256)...")
-doc_hash = hashlib.sha256(document).hexdigest()
-print("Hash:", doc_hash, "\n")
-
-print("Signing Document...")
-signature = private_key.sign(
-document,
-padding.PSS(
-mgf=padding.MGF1(hashes.SHA256()),
-salt_length=padding.PSS.MAX_LENGTH
-),
-hashes.SHA256()
-)
-signature_b64 = base64.b64encode(signature).decode()
-print("Signature :", signature_b64[:60], "...\n")
-try:
-public_key.verify(
-signature,
-
-document,
-padding.PSS(
-mgf=padding.MGF1(hashes.SHA256()),
-salt_length=padding.PSS.MAX_LENGTH ),
-hashes.SHA256()
-)
-print("Signature VALID\n")
-except Exception:
-print("Signature INVALID\n")
-
-print("Do you want to test tampering?
-(y/n)") choice = input(">> ").lower()
-if choice == "y":
-tampered_input = input("Enter tampered message: ")
-tampered_doc = tampered_input.encode()
-try:
-public_key.verify(
-signature,
-tampered_doc,
-padding.PSS(
-mgf=padding.MGF1(hashes.SHA256()),
-salt_length=padding.PSS.MAX_LENGTH ),
-hashes.SHA256()
-)
-print("Signature VALID (Unexpected)\n")
-except Exception:
-print("Signature INVALID (Tampering Detected)\n")
-
-
-
+hola
 
 
 
